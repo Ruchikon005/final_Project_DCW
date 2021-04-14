@@ -1,5 +1,3 @@
-# next-nodejs-auth
-
 ## Run backend (NodeJS)
 ```
 cd backend
