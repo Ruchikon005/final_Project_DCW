@@ -9,8 +9,11 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  background-color: blue;
+  margin-left: 20px;
 }
 
 * {
   box-sizing: border-box;
 }
+

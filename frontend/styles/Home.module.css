@@ -6,6 +6,7 @@
 
 .padding {
     margin-left: 20px;
+    text-align: center;
 }
 
 .content {
@@ -40,4 +41,17 @@
     height: 50px;
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.box {
+    display: flex;
+    height: 20px;
+    width: initial;
+}
+
+.boxmanu {
+    background-color: aqua;
+    height: 30px;
+    width: 40px;
 }
