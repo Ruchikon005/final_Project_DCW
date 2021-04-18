@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Layout from '../components/layout'
 import { useState } from 'react'
 import Navbar from '../components/navbar'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/login.module.css'
 import axios from 'axios'
 import config from '../config/config'
 
@@ -31,22 +31,22 @@ export default function Login({ token }) {
     const loginForm = () => (
         <div className={styles.gridContainer}>
             <div>
-                Username:
+                <label>Username:</label>
             </div>
             <div>
                 <input type="text"
                     name="username"
-                    placeholder="username"
+                    placeholder=""
                     onChange={(e) => setUsername(e.target.value)}
                 />
             </div>
             <div>
-                Password:
+                <label>Password:</label>
             </div>
             <div>
                 <input type="password"
                     name="password"
-                    placeholder="password"
+                    placeholder=""
                     onChange={(e) => setPassword(e.target.value)} />
             </div>
         </div>
@@ -63,20 +63,18 @@ export default function Login({ token }) {
             </Head>
             <div className={styles.container}>
                 <Navbar />
-                <h1>Login</h1>
-                <div><b>Token:</b> {token.substring(0, 15)}...
-                <button onClick={copyText}> Copy token </button>
-                </div>
-                <br/>
-                <div>
-                    Status:  {status}
-                </div>
-                <br />
-                {loginForm()}
-                <div>
+                <div className={styles.card}>
+                    <div>
+                        <h1>Login</h1>
+                    </div>
+                    <div>
+                        {loginForm()}
+                    </div>
                     <button onClick={login}>Login</button>
                 </div>
+
             </div>
+
         </Layout>
     )
 }

@@ -1,0 +1,79 @@
+.container {
+    background-color: black;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.padding {
+    margin-left: 20px;
+    text-align: center;
+}
+
+.content {
+    min-width: 25vw;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: 100px auto;
+    /* grid-gap: 2px; */
+    /* background-color: #2196F3; */
+    margin-bottom: 16px;
+}
+
+.gridContainer>div {
+    text-align: left;
+    padding: 10px 0;
+    font-size: 1.2rem;
+}
+
+.gridContainer>div>input {
+    width: 100%;
+  padding: 4px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+
+.card {
+    color: white;
+    position: absolute;
+    text-align: center;
+    padding: 40px;
+    height: 500px;
+    width: 400px;
+    background-image: linear-gradient(#944dff, #a366ff, #b380ff);
+    border-radius: 4px;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+}
+
+.container>div>button {
+    color: white;
+    font-weight: bold;
+    height: 40px;
+    width: 100px;
+    border-radius: 50px;
+    border: none;
+    background-image: linear-gradient(to bottom right, #0099ff , #66c2ff);
+    transition: all .2s ease-in-out;
+}
+
+.container>div>button:hover {
+    font-weight: bold;
+    width: 150px;
+    transform: scale(1);
+    
+}
+.container>div>button:active {
+    width: 80px;
+    transform: scale(1);
+    background-image: linear-gradient(to bottom right, #0ad822 , #0ad822);
+
+}

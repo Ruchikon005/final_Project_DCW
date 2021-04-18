@@ -1,4 +1,5 @@
 .container {
+    background-color: black;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -35,8 +36,9 @@
     box-sizing: border-box;
     font-size: 1.2rem;
 }
+
 .footer {
-    background-color: green;
+    margin-top: 70px;
     width: initial;
     height: 50px;
     display: flex;
@@ -45,13 +47,36 @@
 }
 
 .box {
-    display: flex;
     height: 20px;
     width: initial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .boxmanu {
-    background-color: aqua;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
     height: 30px;
-    width: 40px;
+    width: 70px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease-in-out;
+}
+
+.boxmanu:hover {
+    background-image: linear-gradient(#944dff,#a366ff, #b380ff);
+    width: 100px;
+    transform: scale(2);
+    margin: 55px;
+}
+
+.box:valid {
+    color: #000;
+    background-image: linear-gradient(#944dff,#a366ff, #b380ff);
+    width: 100px;
+    margin: 55px;
 }
