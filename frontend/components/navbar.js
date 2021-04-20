@@ -13,6 +13,7 @@ const Navbar = () => (
             <Link href="/profile"><div className = {styles.boxmanu}>Profile</div></Link>
             <Link href="/getConfig"><div className = {styles.boxmanu}>Config</div></Link>
             <Link href="/logout"><div className = {styles.boxmanu}>Logout</div></Link>
+            <Link href="/student"><div className = {styles.boxmanu}>Students</div></Link>
             <Link href="/foo"><div className = {styles.boxmanu}>foo</div></Link>
         </div>
 

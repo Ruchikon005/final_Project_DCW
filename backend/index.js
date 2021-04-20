@@ -22,6 +22,79 @@ router.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 router.use(express.json())
 router.use(express.urlencoded({ extended: false }))
 
+let students = {
+    list: [
+        {id: 1, fname: "Jone",surname: "pony",major: "CoE", GPA: 2.8},
+        {id: 2, fname: "Dew",surname: "Ding",major: "CoE", GPA: 4.0}
+    ]
+}
+///////student/////
+router.route('/students')
+    .get((req, res) => res.json(students))
+    .post((req, res) => {
+        let id = (students.list.length)?students.list[students.list.length-1].id+1:1
+        let fname = req.body.fname
+        let surname = req.body.surname
+        let major = req.body.major
+        let GPA = req.body.GPA
+
+        students = { list: [ ...students.list, {id, fname, surname, major, GPA}] }
+        res.json(students)
+
+    })
+
+    router.route('/students/:std_id')
+    
+    .get((req, res) => {
+        let ID = students.list.findIndex( item => (item.id === +req.params.std_id))
+        if(ID >= 0)
+        {
+           res.json(students.list[ID])
+        }
+        else
+           res.json({status: "Fail, get not found!"})
+    })
+    .put((req, res) => {
+
+        let ID = students.list.findIndex( item => ( item.id === +req.params.std_id))
+    
+        if(ID >= 0)
+        {
+
+            students.list[ID].fname = req.body.fname
+            students.list[ID].surname = req.body.surname
+            students.list[ID].major = req.body.major
+            students.list[ID].GPA = req.body.GPA
+            res.json(students)
+            
+        }
+        else
+        {
+            res.json({status: "Fail, Student not found!"})
+        }
+
+           
+    }) 
+    .delete((req, res) => {
+
+        let ID = students.list.findIndex( item => ( item.id === +req.params.std_id))
+
+        
+        if(ID >= 0)
+        {
+            students.list = students.list.filter( item => item.id !== +req.params.std_id )
+            res.json(students)
+            
+        }
+        else
+        {
+            
+            res.json({status: "Fail, Student not found!"})
+        }
+            
+
+    })
+
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', { session: false }, (err, user, info) => {
