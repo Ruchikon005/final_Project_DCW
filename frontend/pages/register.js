@@ -2,7 +2,8 @@
 import { useState } from 'react'
 import Head from 'next/head'
 import Layout from '../components/layout'
-import styles from '../styles/Home.module.css'
+import styleshome from '../styles/Home.module.css'
+import stylesregister from '../styles/register.module.css'
 import Navbar from '../components/navbar'
 import axios from 'axios'
 import config from '../config/config'
@@ -36,65 +37,47 @@ export default function Register({ token }) {
         }
 
     }
-
     const registerForm = () => (
-        <div className={styles.gridContainer}>
-            <div>
-                Username:
-            </div>
-            <div>
+        <div className={stylesregister.gridContainer}> 
                 <input type="text"
                     name="username"
-                    placeholder="username"
+                    placeholder="Username"
                     onChange={(e) => setUsername(e.target.value)}
                 />
-            </div>
-            <div>
-                Email:
-            </div>
-            <div>
+           
                 <input type="email"
                     name="email"
-                    placeholder="email"
+                    placeholder="Email"
                     onChange={(e) => setEmail(e.target.value)} />
-            </div>
-            <div>
-                Password:
-            </div>
-            <div>
+          
                 <input type="password"
                     name="password"
-                    placeholder="password"
+                    placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)} />
-            </div>
-
         </div>
     )
 
+    
 
     return (
         <Layout>
             <Head>
-                <title>Register</title>
+                <title>Sign Up</title>
             </Head>
-            <div className={styles.container}>
+            <div className={styleshome.container}>
                 <Navbar />
-                <h1>Register</h1>
-                <div><b>Token:</b> {token.substring(0, 15)}...
-                <button
-                        onClick={() => { navigator.clipboard.writeText(token) }}>
-                        Copy token
-                </button>
-                </div>
+                <div className={stylesregister.card}>
+                <h1>Sign Up</h1>
                 <br />
             Status:  {status}
                 <br /><br />
-                <div className={styles.content}>
+                <div>
                     {registerForm()}
                 </div>
 
                 <div>
-                    <button onClick={register}>Register</button>
+                    <button className={stylesregister.btnrg} onClick={register}>Register</button>
+                </div>
                 </div>
             </div>
         </Layout>

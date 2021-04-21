@@ -13,7 +13,7 @@ export default function Home({ token }) {
       <div className={styles.container}>
         <Navbar />
         <div className={styles.padding}>
-          <h1>Home page</h1>
+          <h1>Travel Reviwe</h1>
         No login required!
       </div>
       </div>

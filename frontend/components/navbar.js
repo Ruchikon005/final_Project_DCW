@@ -1,23 +1,20 @@
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 const Navbar = () => (
-    
+
     <div className={styles.footer}>
-        
-        <div className={styles.box} id = 'text'>
-            <Link href="/" >
-                <div className = {styles.boxmanu}>Home</div>
-                </Link>
-            <Link href="/register"><div className = {styles.boxmanu}>Register</div></Link>
-            <Link href="/login"><div className = {styles.boxmanu}> Login </div></Link>
-            <Link href="/profile"><div className = {styles.boxmanu}>Profile</div></Link>
-            <Link href="/getConfig"><div className = {styles.boxmanu}>Config</div></Link>
-            <Link href="/logout"><div className = {styles.boxmanu}>Logout</div></Link>
-            <Link href="/student"><div className = {styles.boxmanu}>Students</div></Link>
-            <Link href="/foo"><div className = {styles.boxmanu}>foo</div></Link>
+
+        <div className={styles.box}>
+            <Link href="/" ><a className={styles.boxmanu}>Home</a></Link>
+            <Link href="/login"><a className={styles.boxmanu}>Login </a></Link>
+            <Link href="/profile"><a className={styles.boxmanu}>Profile</a></Link>
+            <Link href="/getConfig"><a className={styles.boxmanu}>Config</a></Link>
+            <Link href="/logout"><a className={styles.boxmanu}>Logout</a></Link>
+            <Link href="/student"><a className={styles.boxmanu}>Reviwe</a></Link>
+            <Link href="/foo"><a className={styles.boxmanu}>foo</a></Link>
         </div>
 
-    </div>
+    </div >
 )
 
-export default Navbar 
+export default Navbar

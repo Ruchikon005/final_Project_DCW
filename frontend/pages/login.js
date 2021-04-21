@@ -2,9 +2,12 @@ import Head from 'next/head'
 import Layout from '../components/layout'
 import { useState } from 'react'
 import Navbar from '../components/navbar'
-import styles from '../styles/login.module.css'
+import styleslogin from '../styles/login.module.css'
+import styleshome from '../styles/Home.module.css'
 import axios from 'axios'
 import config from '../config/config'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Login({ token }) {
 
@@ -29,26 +32,16 @@ export default function Login({ token }) {
     }
 
     const loginForm = () => (
-        <div className={styles.gridContainer}>
-            <div>
-                <label>Username:</label>
-            </div>
-            <div>
-                <input type="text"
-                    name="username"
-                    placeholder=""
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-            </div>
-            <div>
-                <label>Password:</label>
-            </div>
-            <div>
-                <input type="password"
-                    name="password"
-                    placeholder=""
-                    onChange={(e) => setPassword(e.target.value)} />
-            </div>
+        <div className={styleslogin.gridContainer}>
+            <input type="text"
+                name="username"
+                placeholder="Username"
+                onChange={(e) => setUsername(e.target.value)}
+            />
+            <input type="password"
+                name="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)} />
         </div>
     )
 
@@ -61,16 +54,39 @@ export default function Login({ token }) {
             <Head>
                 <title>Login</title>
             </Head>
-            <div className={styles.container}>
+            <div className={styleshome.container}>
                 <Navbar />
-                <div className={styles.card}>
+                <div className={styleslogin.card}>
                     <div>
                         <h1>Login</h1>
                     </div>
                     <div>
                         {loginForm()}
                     </div>
-                    <button onClick={login}>Login</button>
+                    <button className={styleslogin.btnln} onClick={login}>Login</button>
+                    <div className={styleslogin.inner} />
+                    <div>
+                        <button className={styleslogin.btnfb}>
+                            <Image src="/facebook.png"
+                                width={25}
+                                height={25} />
+                                Login with Facebook
+                        </button>
+                    </div>
+                    <div>
+                        <button className={styleslogin.btng}>
+                            <Image src="/search.png"
+                                width={15}
+                                height={15} />
+                                <a>Login with GOOGLE</a>
+                            </button>
+                    </div>
+                    <div className={styleslogin.notmem}>
+                        Not a member ? 
+                    <div><Link href="/register" >sign up now</Link></div>
+                    </div>
+
+
                 </div>
 
             </div>
