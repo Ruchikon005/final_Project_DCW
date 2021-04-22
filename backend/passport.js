@@ -39,9 +39,10 @@ passport.use(
                 console.log('jwt strategy')
                 const index = db.checkExistingUser(jwtPayload.username)
                 if (index !== db.NOT_FOUND) {
+                    
                     // Strip password out
                     const { id, username, email } = users.users[index]
-                                    //Return to caller via req.user
+                    console.log('jwt strategy')                //Return to caller via req.user
                     return cb(null, { id, username, email }); 
                 } else {
                     return cb(null, false);

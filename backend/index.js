@@ -24,48 +24,54 @@ router.use(express.urlencoded({ extended: false }))
 
 let students = {
     list: [
-        {id: 1, fname: "Jone",surname: "pony",major: "CoE", GPA: 2.8},
-        {id: 2, fname: "Dew",surname: "Ding",major: "CoE", GPA: 4.0}
+        {id: 1, fname: "Jone",surname: "pony",major: "CoE", GPA: 2.8, author: "Sompon"},
+        {id: 2, fname: "Dew",surname: "Ding",major: "CoE", GPA: 4.0, author: "Don"}
     ]
 }
-///////student/////
-router.route('/students')
-    .get((req, res) => res.json(students))
-    .post((req, res) => {
-        let id = (students.list.length)?students.list[students.list.length-1].id+1:1
-        let fname = req.body.fname
-        let surname = req.body.surname
-        let major = req.body.major
-        let GPA = req.body.GPA
 
-        students = { list: [ ...students.list, {id, fname, surname, major, GPA}] }
-        res.json(students)
+let reviwes = {
+    list: [
+        {id: 1, content : "go",author: "Don" },
+        {id: 2, content : "travel",author: "XXX" },
+    ]
+}
+/////reviwes/////
+router.route('/reviwes')
+    .get((req, res) => res.json(reviwes))
+router.post('/reviwes',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => { 
+        let id = (reviwes.list.length)?reviwes.list[reviwes.list.length-1].id+1:1
+        let content = req.body.content
+        let author = req.user.username
 
-    })
+        reviwes = { list: [ ...reviwes.list, {id, content, author }] }
 
-    router.route('/students/:std_id')
+        res.json(reviwes)
+    });
+
+    router.route('/reviwes/:rv_id')
     
     .get((req, res) => {
-        let ID = students.list.findIndex( item => (item.id === +req.params.std_id))
+        let ID = reviwes.list.findIndex( item => (item.id === +req.params.rv_id))
         if(ID >= 0)
         {
-           res.json(students.list[ID])
+           res.json(reviwes.list[ID])
         }
         else
            res.json({status: "Fail, get not found!"})
     })
     .put((req, res) => {
 
-        let ID = students.list.findIndex( item => ( item.id === +req.params.std_id))
+        let ID = reviwes.list.findIndex( item => ( item.id === +req.params.rv_id))
     
         if(ID >= 0)
         {
 
-            students.list[ID].fname = req.body.fname
-            students.list[ID].surname = req.body.surname
-            students.list[ID].major = req.body.major
-            students.list[ID].GPA = req.body.GPA
-            res.json(students)
+            reviwes.list[ID].content = req.body.content
+            reviwes.list[ID].author = req.user.username
+            res.json(reviwes)
+            
             
         }
         else
@@ -77,24 +83,23 @@ router.route('/students')
     }) 
     .delete((req, res) => {
 
-        let ID = students.list.findIndex( item => ( item.id === +req.params.std_id))
+        let ID = reviwes.list.findIndex( item => ( item.id === +req.params.std_id))
 
         
         if(ID >= 0)
         {
-            students.list = students.list.filter( item => item.id !== +req.params.std_id )
-            res.json(students)
+            reviwes.list = reviwes.list.filter( item => item.id !== +req.params.std_id )
+            res.json(reviwes)
             
         }
         else
         {
             
-            res.json({status: "Fail, Student not found!"})
+            res.json({status: "Fail, reviwes not found!"})
         }
             
 
     })
-
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', { session: false }, (err, user, info) => {
@@ -137,12 +142,14 @@ router.get('/logout', (req, res) => {
     return res.json({ message: 'Logout successful' })
 })
 
-/* GET user profile. */
 router.get('/profile',
     passport.authenticate('jwt', { session: false }),
-    (req, res, next) => {
-        res.send(req.user)
+    (req, res, next) => { 
+        res.send( req.user)
     });
+
+
+
 
 router.post('/register',
     async (req, res) => {
