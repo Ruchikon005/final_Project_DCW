@@ -29,48 +29,61 @@ let students = {
     ]
 }
 
-let reviwes = {
+let reviwes_pk = {
+    list: [
+        {id: 1, content : "go",author: "Don" },
+        {id: 2, content : "travel",author: "XXX" },
+    ]
+}
+
+let reviwes_ch = {
+    list: [
+        {id: 1, content : "go",author: "Don" },
+        {id: 2, content : "travel",author: "XXX" },
+    ]
+}
+
+let reviwes_kb = {
     list: [
         {id: 1, content : "go",author: "Don" },
         {id: 2, content : "travel",author: "XXX" },
     ]
 }
 /////reviwes/////
-router.route('/reviwes')
-    .get((req, res) => res.json(reviwes))
-router.post('/reviwes',
+router.route('/reviwes_pk')
+    .get((req, res) => res.json(reviwes_pk))
+    .post(
     passport.authenticate('jwt', { session: false }),
     (req, res) => { 
-        let id = (reviwes.list.length)?reviwes.list[reviwes.list.length-1].id+1:1
+        let id = (reviwes_pk.list.length)?reviwes_pk.list[reviwes_pk.list.length-1].id+1:1
         let content = req.body.content
         let author = req.user.username
 
-        reviwes = { list: [ ...reviwes.list, {id, content, author }] }
+        reviwes_pk = { list: [ ...reviwes_pk.list, {id, content, author }] }
 
-        res.json(reviwes)
+        res.json(reviwes_pk)
     });
 
-    router.route('/reviwes/:rv_id')
+router.route('/reviwes_pk/:rv_id')
     
     .get((req, res) => {
-        let ID = reviwes.list.findIndex( item => (item.id === +req.params.rv_id))
+        let ID = reviwes_pk.list.findIndex( item => (item.id === +req.params.rv_id))
         if(ID >= 0)
         {
-           res.json(reviwes.list[ID])
+           res.json(reviwes_pk.list[ID])
         }
         else
            res.json({status: "Fail, get not found!"})
     })
     .put((req, res) => {
 
-        let ID = reviwes.list.findIndex( item => ( item.id === +req.params.rv_id))
+        let ID = reviwes_pk.list.findIndex( item => ( item.id === +req.params.rv_id))
     
         if(ID >= 0)
         {
 
-            reviwes.list[ID].content = req.body.content
-            reviwes.list[ID].author = req.user.username
-            res.json(reviwes)
+            reviwes_pk.list[ID].content = req.body.content
+            res.json(reviwes_pk)
             
             
         }
@@ -82,20 +95,21 @@ router.post('/reviwes',
            
     }) 
     .delete((req, res) => {
+        
 
-        let ID = reviwes.list.findIndex( item => ( item.id === +req.params.std_id))
+        let ID = reviwes_pk.list.findIndex( item => ( item.id === +req.params.rv_id))
 
         
         if(ID >= 0)
         {
-            reviwes.list = reviwes.list.filter( item => item.id !== +req.params.std_id )
-            res.json(reviwes)
+            reviwes_pk.list = reviwes_pk.list.filter( item => item.id !== +req.params.rv_id )
+            res.json(reviwes_pk)
             
         }
         else
         {
             
-            res.json({status: "Fail, reviwes not found!"})
+            res.json({status: "Fail, reviwes_pk not found!"})
         }
             
 

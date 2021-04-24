@@ -2,19 +2,20 @@ import Head from 'next/head'
 import Layout from '../components/layout'
 import Navbar from '../components/navbar'
 import styles from '../styles/Home.module.css'
+import Image from 'next/image'
 
 export default function Home({ token }) {
 
   return (
     <Layout>
       <Head>
+        <link rel="shortcut icon" href="/facebook.png" />
         <title>First Page</title>
       </Head>
       <div className={styles.container}>
         <Navbar />
         <div className={styles.padding}>
-          <h1>Travel Reviwe</h1>
-        No login required!
+          <h1>Travel Reviwes</h1>
       </div>
       </div>
     </Layout>
