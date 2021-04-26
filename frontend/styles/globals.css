@@ -16,3 +16,40 @@ a {
   box-sizing: border-box;
 }
 
+button#bte{
+  color: white;
+  height: 20px;
+  background-color: rgb(126, 126, 126);
+  border: none;
+}
+
+button#btu{
+  color: white;
+  height: 20px;
+  background-color: rgb(255, 22, 22);
+  border: none;
+}
+
+button#btp{
+  color: white;
+  height: 20px;
+  background-color: rgb(0, 113, 218);
+  border: none;
+}
+button:disabled{
+  display: none;
+}
+a:disabled{
+  display: none;
+}
+
+ul{
+  list-style-type: none;
+  
+}
+
+hr{
+  border-bottom: 1px solid rgb(150, 150, 150);
+  width: 100%;
+}
+

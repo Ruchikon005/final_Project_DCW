@@ -7,8 +7,13 @@ import axios from 'axios'
 import withAuth from '../components/withAuth'
 import config from '../config/config'
 import useSWR, { mutate } from 'swr'
+import Link from 'next/link'
+import Image from 'next/image'
 
-const URL1 = `http://localhost/api/reviwes`
+const URL1 = `http://localhost/api/reviwes_kb`
+const fetcher = (URL1) => axios.get(URL1).then(res => res.data)
+
+const URL2 = `http://localhost/api/reviwes_kb`
 const fetcher = (URL1) => axios.get(URL1).then(res => res.data)
 
 const Reviwe_krabi = ({ token }) => {
@@ -17,7 +22,6 @@ const Reviwe_krabi = ({ token }) => {
     const [reviwe, setReviwe] = useState('')
     const [content, setContent] = useState('')
     const [idEdit, setIdEdit] = useState(0)
-    import Image from 'next/image'
 
     const { data, error } = useSWR(URL1, fetcher)
     if (!data) return <div>Loading...</div>
@@ -26,39 +30,57 @@ const Reviwe_krabi = ({ token }) => {
     const printContents = (reviwes) => {
         console.log('reviwe: ', reviwes)
         if (reviwes && reviwes.length)
-        
+
             return (reviwes.map((reviwe, index) =>
 
-            (<div key={index}>
-                <div>
-                {(reviwe) ? reviwe.author : '-'} 
+            (<li key={index}>
+                <div className={styles.formath}>
+                    <div className={styles.h}>
+                        <div>
+                            <Image src="/0c3b3adb1a7530892e55ef36d3be6cb8.png"
+                                width={30}
+                                height={30} />
+                        </div>
+                        {(reviwe) ? reviwe.author : '-'}
+
+                    </div>
+                    <div className={styles.content} >
+                        {(idEdit !== reviwe.id) ?
+                            reviwe.content :
+                            (<input type="text"
+                                name="name"
+                                onChange={(e) => setContent(e.target.value)}
+                            />)
+                        }
+                        
+
+                        
+                    </div>
+                    <div className={styles.mar}>
+                            <button id="bte" disabled={token === ""} onClick={() => editContent(reviwe, reviwe.id)}>Edit</button>
+                            <button id="btu" disabled={token === ""} onClick={() => deleteContent(reviwe.id)}>Delete</button>
+                        </div><hr />
                 </div>
-                {(idEdit !== reviwe.id) ?
-                       reviwe.content :
-                       (<input type="text"
-                           name="name"
-                           onChange={(e) => setContent(e.target.value)}
-                       />)
-                   }
-                <button onClick={() => editContent(reviwe,reviwe.id)}>Edit</button>
-                <button disabled={token === ""} onClick={() => deleteContent(reviwe.id)}>Delete</button>
-            </div>)
+
+            </li>
+            )
 
             ))
         else {
             (<h2>content</h2>)
-        } 
+        }
     }
 
-    const editContent = (reviwe,id) => {
+    const editContent = (reviwe, id) => {
         setIdEdit(id)
         if (+idEdit === +id) { //Press Edit again
-            if (+reviwe.id === +id){
+            if (+reviwe.id === +id) {
                 updateContent(reviwe.id)
             }
             setIdEdit(0)
         }
     }
+
     const getContent = async (id) => {
 
         let reviwes = await axios.get(`${URL1}/${id}`);
@@ -68,14 +90,15 @@ const Reviwe_krabi = ({ token }) => {
 
         });
 
-        
+
     }
 
     const addContent = async (content) => {
 
-        let reviwes = await axios.post(URL1, {content},
-            {headers: { Authorization: `Bearer ${token}` }
-        });
+        let reviwes = await axios.post(URL1, { content },
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            });
 
         mutate(URL1)
 
@@ -103,20 +126,62 @@ const Reviwe_krabi = ({ token }) => {
                 <title>reviwe_krabi</title>
             </Head>
             <div className={styles.container}>
-                <Navbar />
-                <h1>Krabi</h1>
-                {reviwe.content} {reviwe.author}
-
                 <div>
-                    <ul>{printContents(data.list)} </ul>
-
-                    <h2>Add Content</h2>
-
-                    Content : <input type="text" onChange={(e) => setContent(e.target.value)}></input>
-
-                    <button disabled={token === ""} onClick={() => addContent(content)}>Add</button>
+                  
                 </div>
+                
+                <div className={styles.section}>
+                    <h1>Krabi</h1>
+                </div>
+                <div className={styles.detial}>
+                    <div className={styles.areaimage}>
+
+                        <Image src="/2019-05_c5e2bc8e94e4910.jpg"
+                            width={500}
+                            height={344} />
+
+                        <div >
+
+                            <Image src="/p1.jpg"
+                                width={200}
+                                height={133.5} />
+
+                            <Image src="/dFQROr7oWzulq5FZUEh3LKhS9932LER9QK5rnr5uzRS6hA0e4k7JIO6Gw94otMc1f9K.jpg"
+                                width={300}
+                                height={133.5} />
+                        </div>
+                    </div>
+                    <div className={styles.comment}>
+                        <ul className={styles.scroll}>{printContents(data.list)} </ul>
+
+                        
+                            <div className={styles.display} disabled={token === ""}>
+                                <h2 >Comment</h2>
+                                <textarea className={styles.text_area} disabled={token === ""} type="text" onChange={(e) => setContent(e.target.value)} />
+                                <div>
+                                    <button id="btp" disabled={token === ""} onClick={() => addContent(content)}>Post</button>
+                                </div>
+
+                            </div>
+                            <div className={styles.display} disabled={token !== ""}>
+                                <Link href="/login">
+                                    <a className={styles.loginadd}>
+                                        <div >
+                                            Log in to add a reviews
+                                        </div>
+                                    </a>
+                                </Link>
+                            </div>
+
+                    </div>
+
+                </div>
+
+
+
+
             </div>
+            <Navbar />  
         </Layout>
     )
 }

@@ -1,6 +1,16 @@
 .container {
-    background-color: black;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container_b {
+    
     color: white;
+    
+    background: url(/135754665_2511331152505300_6399707290704386433_n.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -8,7 +18,7 @@
 }
 
 .padding {
-    margin-left: 20px;
+    margin-top: 150px;
     text-align: center;
 }
 
@@ -19,8 +29,8 @@
 
 .footer {
     position: fixed;
+    top: 0;
     background-color: #000;
-    
     width: 100%;
     height: 100px;
     display: flex;
@@ -78,12 +88,10 @@
     text-align: center;
     width: 100%;
 }
-.ho[disabled]{
+.ho{
     display: none;
-    left: 0;
-    bottom: 10%;
-    text-align: center;
-    width: 100%;
+    background-color: #944dff;
+    
 }
 
 .display>div>button{
@@ -94,7 +102,7 @@
     height: 50px;
     width: 100%;
     font-size: 16px;
-    border: none;
+    border: 2px solid rgb(150, 150, 150);
     resize: none;
     padding: 10px;
     border-radius: 5px;
@@ -103,15 +111,16 @@
 .scroll {
   margin-top: 5%;
   right: 7%;
-  width: 350px;
-  height: 400px;
+  width: 100%;
+  height: 70%;
   overflow: auto;
 }
 
 .section{
     padding-left: 100px;
-    background-color: #000;  
-    position: fixed;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);  
+    
     width: 100%;
     height: 100px;
     left: 0;
@@ -119,13 +128,96 @@
 }
 
 .fixed {
+    color: #000;
     position: fixed;
     margin-top: 175px;
     margin-right: 7%;
+    height: 20;
     top: 0;
     right: 0;
 }
 
 .detial{
-    margin-top: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-right: 100px;
+    padding-left: 100px;
+}
+.areaimage{
+    margin-right: 20%;
+    
+}
+
+.loginadd{
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.loginadd>div{
+    width: 200px;
+    height: 35px;
+    border-radius: 5px;
+    background-image: linear-gradient(#944dff,#a366ff, #b380ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease-in-out;
+
+}
+.loginadd>div:hover{
+    width: 300px;
+    transform: scale(1.1);
+
+}
+.h{
+    display: flex;
+    align-items: center;
+}
+.h>div{
+    margin-right: 10px;
+}
+
+.content{
+    color: red;
+    padding-left: 40px;
+    
+}
+
+.formath{
+    margin-bottom: 20px;
+}
+
+.mar{
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+.mar>button{
+    margin-right: 10px;
+}
+
+.boxmanu[disabled]{
+    display: none;
+}
+
+
+.comment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+
+    grid-column-end: auto;
+    
+}
+
+.back{
+    height: 500px;
+    width: 100%;
+    background-color: #000;
+
 }

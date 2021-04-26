@@ -9,13 +9,12 @@ export default function Home({ token }) {
   return (
     <Layout>
       <Head>
-        <link rel="shortcut icon" href="/facebook.png" />
         <title>First Page</title>
       </Head>
-      <div className={styles.container}>
+      <div className={styles.container_b}>
         <Navbar />
         <div className={styles.padding}>
-          <h1>Travel Reviwes</h1>
+            <h1>Travel Reviwes</h1>
       </div>
       </div>
     </Layout>

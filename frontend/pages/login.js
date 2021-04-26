@@ -23,12 +23,15 @@ export default function Login({ token }) {
             console.log('result: ', result)
             console.log('result.data:  ', result.data)
             console.log('token:  ', token)
-            setStatus(result.status + ': ' + result.data.user.username)
+            setStatus(result.data.message)
+
         }
         catch (e) {
             console.log('error: ', JSON.stringify(e.response))
             setStatus(JSON.stringify(e.response).substring(0, 80) + "...")
         }
+
+
     }
 
     const loginForm = () => (
@@ -45,9 +48,6 @@ export default function Login({ token }) {
         </div>
     )
 
-    const copyText = () => {
-        navigator.clipboard.writeText(token)
-    }
 
     return (
         <Layout>
@@ -56,37 +56,44 @@ export default function Login({ token }) {
             </Head>
             <div className={styleshome.container}>
                 <Navbar />
-                <div className={styleslogin.card}>
-                    <div>
-                        <h1>Login</h1>
-                    </div>
-                    <div>
-                        {loginForm()}
-                    </div>
-                    <button className={styleslogin.btnln} onClick={login}>Login</button>
-                    <div className={styleslogin.inner} />
-                    <div>
-                        <button className={styleslogin.btnfb}>
-                            <Image src="/facebook.png"
-                                width={25}
-                                height={25} />
+                <div className={styleshome.padding}>
+                    <div className={styleslogin.card}>
+                        <div>
+                            <h1>Login</h1>
+                        </div>
+                        <div>
+                            {loginForm()}
+                        </div>
+
+                        <button disation={token !== ""} className={styleslogin.btnln} onClick={login}>
+                            login
+                        </button>
+                        <div className={styleslogin.inner} />
+                        <div>
+                            <button className={styleslogin.btnfb}>
+                                <Image src="/facebook.png"
+                                    width={25}
+                                    height={25} />
                                 Login with Facebook
                         </button>
-                    </div>
-                    <div>
-                        <button className={styleslogin.btng}>
-                            <Image src="/search.png"
-                                width={15}
-                                height={15} />
+                        </div>
+                        <div>
+                            <button className={styleslogin.btng}>
+                                <Image src="/search.png"
+                                    width={15}
+                                    height={15} />
                                 <a>Login with GOOGLE</a>
                             </button>
-                    </div>
-                    <div className={styleslogin.notmem}>
-                        Not a member ? 
-                    <div><Link href="/register" >sign up now</Link></div>
-                    </div>
+                        </div>
+                        <div className={styleslogin.notmem}>
+                            Not a member ?
+                            <div>
+                                <Link href="/register" >sign up now</Link>
+                            </div>
+                        </div>
 
 
+                    </div>
                 </div>
 
             </div>

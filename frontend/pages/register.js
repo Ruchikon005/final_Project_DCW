@@ -38,26 +38,26 @@ export default function Register({ token }) {
 
     }
     const registerForm = () => (
-        <div className={stylesregister.gridContainer}> 
-                <input type="text"
-                    name="username"
-                    placeholder="Username"
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-           
-                <input type="email"
-                    name="email"
-                    placeholder="Email"
-                    onChange={(e) => setEmail(e.target.value)} />
-          
-                <input type="password"
-                    name="password"
-                    placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)} />
+        <div className={stylesregister.gridContainer}>
+            <input type="text"
+                name="username"
+                placeholder="Username"
+                onChange={(e) => setUsername(e.target.value)}
+            />
+
+            <input type="email"
+                name="email"
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)} />
+
+            <input type="password"
+                name="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)} />
         </div>
     )
 
-    
+
 
     return (
         <Layout>
@@ -67,17 +67,17 @@ export default function Register({ token }) {
             <div className={styleshome.container}>
                 <Navbar />
                 <div className={stylesregister.card}>
-                <h1>Sign Up</h1>
-                <br />
-            Status:  {status}
-                <br /><br />
-                <div>
-                    {registerForm()}
-                </div>
+                    <h1>Sign Up</h1>
+                    <br />
+                    {status}
+                    <br /><br />
+                    <div>
+                        {registerForm()}
+                    </div>
 
-                <div>
-                    <button className={stylesregister.btnrg} onClick={register}>Register</button>
-                </div>
+                    <div>
+                        <button className={stylesregister.btnrg} onClick={register}>Register</button>
+                    </div>
                 </div>
             </div>
         </Layout>

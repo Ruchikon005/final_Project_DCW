@@ -22,34 +22,29 @@ router.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 router.use(express.json())
 router.use(express.urlencoded({ extended: false }))
 
-let students = {
-    list: [
-        {id: 1, fname: "Jone",surname: "pony",major: "CoE", GPA: 2.8, author: "Sompon"},
-        {id: 2, fname: "Dew",surname: "Ding",major: "CoE", GPA: 4.0, author: "Don"}
-    ]
-}
 
 let reviwes_pk = {
     list: [
-        {id: 1, content : "go",author: "Don" },
-        {id: 2, content : "travel",author: "XXX" },
+        {id: 1, content : "go",author: "game" ,like: 1},
+        {id: 2, content : "travel",author: "X1" ,like: 2},
     ]
 }
 
 let reviwes_ch = {
     list: [
-        {id: 1, content : "go",author: "Don" },
-        {id: 2, content : "travel",author: "XXX" },
+        {id: 1, content : "go",author: "Dew" },
+        {id: 2, content : "travel",author: "X2" },
     ]
 }
 
 let reviwes_kb = {
     list: [
-        {id: 1, content : "go",author: "Don" },
-        {id: 2, content : "travel",author: "XXX" },
+        {id: 1, content : "go",author: "Fon" },
+        {id: 2, content : "travel",author: "X3" },
     ]
 }
-/////reviwes/////
+
+/////reviwes_pk/////
 router.route('/reviwes_pk')
     .get((req, res) => res.json(reviwes_pk))
     .post(
@@ -81,9 +76,62 @@ router.route('/reviwes_pk/:rv_id')
     
         if(ID >= 0)
         {
-
             reviwes_pk.list[ID].content = req.body.content
+            res.json(reviwes_pk)  
+        }
+        else
+        {
+            res.json({status: "Fail, Student not found!"})
+        }    
+    }) 
+    .delete((req, res) => {
+        let ID = reviwes_pk.list.findIndex( item => ( item.id === +req.params.rv_id))
+        if(ID >= 0)
+        {
+            reviwes_pk.list = reviwes_pk.list.filter( item => item.id !== +req.params.rv_id )
             res.json(reviwes_pk)
+        }
+        else
+        {
+            res.json({status: "Fail, reviwes_pk not found!"})
+        }
+    })
+
+/////reviwes_pk/////
+router.route('/reviwes_ch')
+    .get((req, res) => res.json(reviwes_ch))
+    .post(
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => { 
+        let id = (reviwes_ch.list.length)?reviwes_ch.list[reviwes_ch.list.length-1].id+1:1
+        let content = req.body.content
+        let author = req.user.username
+
+        reviwes_ch = { list: [ ...reviwes_ch.list, {id, content, author }] }
+
+        res.json(reviwes_ch)
+    });
+
+router.route('/reviwes_ch/:rv_id')
+    
+    .get((req, res) => {
+        let ID = reviwes_ch.list.findIndex( item => (item.id === +req.params.rv_id))
+        if(ID >= 0)
+        {
+           res.json(reviwes_ch.list[ID])
+        }
+        else
+           res.json({status: "Fail, get not found!"})
+    })
+    .put((req, res) => {
+
+        let ID = reviwes_ch.list.findIndex( item => ( item.id === +req.params.rv_id))
+    
+        if(ID >= 0)
+        {
+
+            reviwes_ch.list[ID].content = req.body.content
+            res.json(reviwes_ch)
             
             
         }
@@ -97,19 +145,85 @@ router.route('/reviwes_pk/:rv_id')
     .delete((req, res) => {
         
 
-        let ID = reviwes_pk.list.findIndex( item => ( item.id === +req.params.rv_id))
+        let ID = reviwes_ch.list.findIndex( item => ( item.id === +req.params.rv_id))
 
         
         if(ID >= 0)
         {
-            reviwes_pk.list = reviwes_pk.list.filter( item => item.id !== +req.params.rv_id )
-            res.json(reviwes_pk)
+            reviwes_ch.list = reviwes_ch.list.filter( item => item.id !== +req.params.rv_id )
+            res.json(reviwes_ch)
             
         }
         else
         {
             
-            res.json({status: "Fail, reviwes_pk not found!"})
+            res.json({status: "Fail, reviwes_ch not found!"})
+        }
+            
+
+    })
+
+/////reviwes_kb/////
+router.route('/reviwes_kb')
+    .get((req, res) => res.json(reviwes_kb))
+    .post(
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => { 
+        let id = (reviwes_kb.list.length)?reviwes_kb.list[reviwes_kb.list.length-1].id+1:1
+        let content = req.body.content
+        let author = req.user.username
+
+        reviwes_kb = { list: [ ...reviwes_kb.list, {id, content, author }] }
+
+        res.json(reviwes_kb)
+    });
+
+router.route('/reviwes_kb/:rv_id')
+    
+    .get((req, res) => {
+        let ID = reviwes_kb.list.findIndex( item => (item.id === +req.params.rv_id))
+        if(ID >= 0)
+        {
+           res.json(reviwes_kb.list[ID])
+        }
+        else
+           res.json({status: "Fail, get not found!"})
+    })
+    .put((req, res) => {
+
+        let ID = reviwes_kb.list.findIndex( item => ( item.id === +req.params.rv_id))
+    
+        if(ID >= 0)
+        {
+
+            reviwes_kb.list[ID].content = req.body.content
+            res.json(reviwes_kb)
+            
+            
+        }
+        else
+        {
+            res.json({status: "Fail, Student not found!"})
+        }
+
+           
+    }) 
+    .delete((req, res) => {
+        
+
+        let ID = reviwes_kb.list.findIndex( item => ( item.id === +req.params.rv_id))
+
+        
+        if(ID >= 0)
+        {
+            reviwes_kb.list = reviwes_kb.list.filter( item => item.id !== +req.params.rv_id )
+            res.json(reviwes_kb)
+            
+        }
+        else
+        {
+            
+            res.json({status: "Fail, reviwes_kb not found!"})
         }
             
 

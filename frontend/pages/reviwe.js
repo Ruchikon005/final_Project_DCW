@@ -17,25 +17,35 @@ export default function Reviwes({ token }) {
                 <Navbar />
                 <div className={styles.padding}>
                     <h1>Travel Reviwe</h1>
-        No login required!
-      </div>
-                <div className={styles.footer}>
+                </div>
+                <div className={styles.row}>
 
                     <div className={styles.box}>
                         <Link href="/reviwe_phuket">
                             <a className={styles.boxmanu}>
                                 <div>Phuket</div>
                                 <div className={styles.Image}>
-                                    <Image  src="/facebook.png"
-                                        width={25}
-                                        height={25} />
+                                    <Image src="/2019-05_c5e2bc8e94e4910.jpg"
+                                        width={568.375}
+                                        height={378.875} />
                                 </div>
                             </a>
 
 
                         </Link>
-                        <Link href="/reviwe_cheangmai"><a className={styles.boxmanu}>Cheangmai</a></Link>
-                        <Link href="/reviwe_krabi"><a className={styles.boxmanu}>Krabi</a></Link>
+                        <Link href="/reviwe_cheangmai"><a className={styles.boxmanu}><div>Chiang Mai</div>
+                            <Image src="/landscape-of-two-pagoda-at-the-inthanon-mountain-at-sunset--chiang-mai--thailand--642551278-5c34a4a846e0fb000116cc69.jpg"
+                                width={568.375}
+                                height={378.875} />
+                            <div className={styles.Image}>
+
+                            </div></a></Link>
+                        <Link href="/reviwe_krabi"><a className={styles.boxmanu}><div>Krabi</div>
+                            <div className={styles.Image}>
+                                <Image src="/Koh-Poda.jpg"
+                                    width={568.375}
+                                    height={378.875} />
+                            </div></a></Link>
                     </div>
 
                 </div >

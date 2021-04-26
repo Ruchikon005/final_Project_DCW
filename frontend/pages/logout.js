@@ -3,6 +3,7 @@ import Layout from '../components/layout'
 import Navbar from '../components/navbar'
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
+import styleslogin from '../styles/login.module.css'
 import axios from 'axios'
 import config from '../config/config'
 
@@ -19,7 +20,7 @@ export default function Logout({ token }) {
         let result = await axios.get(`${config.URL}/logout`, { withCredentials: true })
         setStatus("Logout successful")
     }
- 
+
     return (
         <Layout>
             <Head>
@@ -27,10 +28,17 @@ export default function Logout({ token }) {
             </Head>
             <div className={styles.container}>
                 <Navbar />
-                <h1>Logout</h1>
-                <div>
-                    <h2> {status}  </h2>
+                <div className={styles.padding}>
+                    <div className={styleslogin.card}>
+                        <h1>Logout</h1>
+                        <div>
+                            <h2> {status}  </h2>
+                        </div>
+                    </div>
+
                 </div>
+
+
             </div>
         </Layout>
     )
